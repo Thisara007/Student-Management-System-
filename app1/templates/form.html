@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content1 %}
+<div class="row">
+    <div class="col-6 offset-3 mt-3">
+<form action="" method="post" nonvalidate> 
+    {% csrf_token %}
+{% if data.non_fields_errors %}
+    {% for error in data.non_fields_errors %}
+    <span class="errorstyle">{{error}}</span>
+    {% endfor %}
+{% endif %}
+{% for field in data %}
+{{field.label_tag}}
+{{field}}
+    <div>
+    {% for error in field.errors %}
+    <small class="errorstyle">{{error|striptags}}</small>
+    {% endfor %}
+    </div>
+{% endfor %}
+
+<input type="submit" class="btn btn-success mt-3 "value="Create">
+</form>
+</div>
+</div>
+{% endblock content1 %}
